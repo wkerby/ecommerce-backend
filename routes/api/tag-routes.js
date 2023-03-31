@@ -28,7 +28,7 @@ router.get('/:id', async (req, res) => {
   });
 
   if (!tagData) {
-    res.status(404).json({ message: 'Oops! No product found with that id!'});
+    res.status(404).json({ message: 'Oops! No tag found with that id!'});
     return;
   }
 
