@@ -23,9 +23,11 @@ router.get('/', async (req, res) => {
 
 // get one product
 router.get('/:id', async (req, res) => {
-  // find a single product by its `id`
+  
   try {
+      // find a single product by its `id`
     const prodData = await Product.findByPk(req.params.id, {
+      // be sure to include its associated Category and Tag data
       include: [{ model : Category}, { model : Tag }]
     });
 
@@ -41,7 +43,7 @@ router.get('/:id', async (req, res) => {
     res.status(500).json(err);
 
   }
-  // be sure to include its associated Category and Tag data
+  
 });
 
 // create new product
@@ -119,7 +121,17 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
+  Product.destroy({
+    where: {
+      id: req.params.id //here, we're requesting that the server delete the book record whose id was specified in the url
+    },
+  })
   // delete one product by its `id` value
-});
+})
+  .then((delProd) => {
+    res.json(delProd);
+  })
+  .catch((err) => {
+    res.json(err)});
 
 module.exports = router;
