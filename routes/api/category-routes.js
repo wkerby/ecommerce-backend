@@ -59,6 +59,22 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
   // update a category by its `id` value
+  Category.update(
+    {
+      category_name: req.body.category_name,
+    },
+    {
+    where: {
+      id: req.params.id, //this will update the correct record in the Tag model based off of id provided in url
+    },
+  })
+  .then((updatedCat) => {
+    res.json(updatedCat);
+
+  })
+  .catch((err) => {
+    res.json(err);
+  });
 });
 
 router.delete('/:id', (req, res) => {
