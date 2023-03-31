@@ -65,7 +65,7 @@ router.put('/:id', (req, res) => {
     },
     {
     where: {
-      id: req.params.id, //this will update the correct record in the Tag model based off of id provided in url
+      id: req.params.id, //this will update the correct record in the Category model based off of id provided in url
     },
   })
   .then((updatedCat) => {
@@ -79,6 +79,15 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete a category by its `id` value
+  Category.destroy({
+    where: {
+      id: req.params.id
+    },
+  })
+  .then((deletedCat) => {
+    res.json(deletedCat);
+  })
+  .catch((err) => res.json(err));
 });
 
 module.exports = router;

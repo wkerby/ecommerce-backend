@@ -127,11 +127,12 @@ router.delete('/:id', (req, res) => {
     },
   })
   // delete one product by its `id` value
-})
   .then((delProd) => {
     res.json(delProd);
   })
   .catch((err) => {
     res.json(err)});
+
+  });
 
 module.exports = router;
